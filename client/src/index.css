@@ -1,0 +1,207 @@
+/*
+ * ─────────────────────────────────────────────────────────────
+ *  grn.35 — global theme
+ *  Design: "Soft Atelier" (haute couture lookbook)
+ *  Background: powder cream (#F2EBE5)
+ *  Text:       deep mocha (#2B201A)
+ *  Accent:     patinated gold (#A8895C)
+ *  Type:       Fraunces (display, Latin Extended) · Cormorant italic (subhead)
+ *              EB Garamond (body) · JetBrains Mono (eyebrow)
+ *  Tone:       slow, tactile, generous whitespace, no flat black
+ * ─────────────────────────────────────────────────────────────
+ */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: "Fraunces", "Cormorant Garamond", serif;
+  --font-serif: "EB Garamond", "Cormorant Garamond", serif;
+  --font-italic: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-cream: #f2ebe5;
+  --color-cream-deep: #ebe1d6;
+  --color-mocha: #2b201a;
+  --color-mocha-soft: #4a3a2f;
+  --color-gold: #a8895c;
+  --color-rose: #c9a89a;
+}
+
+:root {
+  --radius: 0px;
+  --background: oklch(0.929 0.014 60);  /* #F2EBE5 powder cream */
+  --foreground: oklch(0.235 0.018 50);  /* #2B201A deep mocha */
+  --card: oklch(0.95 0.012 60);
+  --card-foreground: oklch(0.235 0.018 50);
+  --popover: oklch(0.929 0.014 60);
+  --popover-foreground: oklch(0.235 0.018 50);
+  --primary: oklch(0.62 0.07 70);       /* #A8895C gold */
+  --primary-foreground: oklch(0.929 0.014 60);
+  --secondary: oklch(0.9 0.018 50);
+  --secondary-foreground: oklch(0.235 0.018 50);
+  --muted: oklch(0.9 0.018 50);
+  --muted-foreground: oklch(0.45 0.025 50);
+  --accent: oklch(0.78 0.04 30);        /* #C9A89A rose */
+  --accent-foreground: oklch(0.235 0.018 50);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.235 0.018 50 / 14%);
+  --input: oklch(0.235 0.018 50 / 18%);
+  --ring: oklch(0.62 0.07 70);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-mocha);
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    /* Subtle paper grain — generated via SVG noise */
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.17  0 0 0 0 0.13  0 0 0 0 0.10  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-attachment: fixed;
+    background-size: 240px 240px;
+  }
+
+  ::selection {
+    background-color: var(--color-mocha);
+    color: var(--color-cream);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href] {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .container { padding-left: 2rem; padding-right: 2rem; }
+  }
+  @media (min-width: 1024px) {
+    .container { padding-left: 3rem; padding-right: 3rem; max-width: 1440px; }
+  }
+
+  .flex { min-height: 0; min-width: 0; }
+
+  /* Editorial typography helpers */
+  .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+  .font-italic-serif { font-family: var(--font-italic); font-style: italic; }
+  .font-mono-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .hairline {
+    background-color: var(--color-mocha);
+    opacity: 0.18;
+    height: 1px;
+    width: 100%;
+  }
+
+  .vignette::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 80px 10px rgba(43, 32, 26, 0.18);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px) scale(1.02);
+    filter: blur(2px);
+    transition:
+      opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1100ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform, filter;
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  /* Softer ratio frames */
+  .frame {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-cream-deep);
+  }
+  .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .frame:hover img {
+    transform: scale(1.015);
+    filter: brightness(1.03);
+  }
+
+  /* Marquee for ticker */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 4rem;
+    animation: marquee 60s linear infinite;
+    white-space: nowrap;
+  }
+}

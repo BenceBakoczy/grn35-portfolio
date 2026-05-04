@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>grn.35 — Portfolio 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+    background: #F2EBE5;
+    @top-left  { content: "grn.35"; font-family: "Fraunces", serif; font-size: 9pt; color: #2B201A; }
+    @top-right { content: "Portfolio · 2026"; font-family: "JetBrains Mono", monospace; font-size: 7.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: #2B201A; opacity: 0.6; }
+    @bottom-left  { content: "Editorial & Portrait Photography"; font-family: "JetBrains Mono", monospace; font-size: 7pt; letter-spacing: 0.2em; text-transform: uppercase; color: #2B201A; opacity: 0.5; }
+    @bottom-right { content: counter(page) " / " counter(pages); font-family: "JetBrains Mono", monospace; font-size: 7.5pt; letter-spacing: 0.2em; color: #2B201A; opacity: 0.6; }
+  }
+
+  @page :first {
+    margin: 0;
+    background: #F2EBE5;
+    @top-left  { content: ""; }
+    @top-right { content: ""; }
+    @bottom-left  { content: ""; }
+    @bottom-right { content: ""; }
+  }
+  @page bleed {
+    margin: 0;
+    @top-left { content: ""; }
+    @top-right { content: ""; }
+    @bottom-left { content: ""; }
+    @bottom-right { content: ""; }
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #F2EBE5;
+    color: #2B201A;
+    font-family: "EB Garamond", serif;
+    font-size: 10.5pt;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display { font-family: "Fraunces", serif; font-weight: 300; letter-spacing: -0.005em; line-height: 1; }
+  .italic  { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 300; }
+  .mono    { font-family: "JetBrains Mono", monospace; font-size: 7.5pt; letter-spacing: 0.22em; text-transform: uppercase; }
+  .gold    { color: #A8895C; }
+  .muted   { color: #4A3A2F; }
+  .hairline { height: 0.5pt; background: #2B201A; opacity: 0.25; width: 100%; }
+
+  .cover {
+    page: bleed;
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    overflow: hidden;
+    background: #F2EBE5;
+    page-break-after: always;
+  }
+
+  .page {
+    page-break-after: always;
+    min-height: calc(297mm - 36mm);
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .folio-row {
+    display: flex; align-items: center; gap: 8mm;
+    margin-bottom: 8mm;
+  }
+  .folio-row .line { flex: 1; height: 0.5pt; background: #2B201A; opacity: 0.25; }
+  .folio-row .label { color: #A8895C; }
+
+  .h-display {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 48pt;
+    line-height: 0.98;
+    letter-spacing: -0.012em;
+  }
+  .h-display .it {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    color: #4A3A2F;
+    font-size: 0.78em;
+    display: block;
+    padding-left: 0.8em;
+  }
+
+  .body-col {
+    max-width: 130mm;
+    font-size: 11pt;
+    line-height: 1.75;
+  }
+
+  .img-frame {
+    position: relative;
+    overflow: hidden;
+    background: #EBE1D6;
+  }
+  .img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .caption {
+    margin-top: 3mm;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 6mm;
+  }
+  .caption .it { font-size: 11pt; }
+
+  .toc-list {
+    border-top: 0.5pt solid rgba(43,32,26,0.25);
+  }
+  .toc-list li {
+    list-style: none;
+    border-bottom: 0.5pt solid rgba(43,32,26,0.25);
+    padding: 4mm 0;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 6mm;
+  }
+  .toc-list .num { font-family: "JetBrains Mono", monospace; font-size: 8pt; opacity: 0.55; letter-spacing: 0.2em; }
+  .toc-list .title { font-family: "Fraunces", serif; font-weight: 300; font-size: 18pt; }
+
+  .plate {
+    page: bleed;
+    width: 210mm; height: 297mm;
+    overflow: hidden;
+    page-break-after: always;
+    background: #2B201A;
+    position: relative;
+  }
+  .plate img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .plate-meta {
+    position: absolute;
+    left: 12mm; bottom: 10mm; right: 12mm;
+    color: #F2EBE5;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(43,32,26,0.6);
+  }
+  .plate-folio {
+    position: absolute;
+    right: 12mm; top: 10mm;
+    color: #F2EBE5;
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 12pt;
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(43,32,26,0.6);
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+    max-width: 120mm;
+  }
+  .contact-grid .row {
+    border-top: 0.5pt solid rgba(43,32,26,0.25);
+    padding-top: 3mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .contact-grid .row:last-child { padding-bottom: 3mm; }
+
+  .index-grid { display: flex; flex-wrap: wrap; gap: 4mm; }
+  .index-grid .item { width: calc((100% - 8mm) / 3); }
+  .index-grid .item .img-frame { aspect-ratio: 3/4; height: 70mm; }
+  .index-grid .item .cap { display: flex; justify-content: space-between; margin-top: 2mm; font-size: 7pt; font-family: "JetBrains Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; }
+
+  .colophon {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────── COVER ─────────── -->
+<section class="cover" style="display:flex;">
+  <div style="flex: 0 0 95mm; padding: 18mm 12mm 18mm 18mm; display:flex; flex-direction:column; justify-content:space-between; background:#F2EBE5; color:#2B201A;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div style="font-family:'Fraunces',serif; font-weight:300; font-size:22pt; line-height:1;">grn<span style="color:#A8895C">.</span>35</div>
+      <div class="mono" style="opacity:.6">No. 01</div>
+    </div>
+
+    <div>
+      <div class="mono gold" style="margin-bottom:6mm;">2026 · Volume One</div>
+      <h1 style="font-family:'Fraunces',serif; font-weight:300; font-size:46pt; line-height:0.96; letter-spacing:-0.012em; margin:0;">
+        A chronicler<br/>
+        of quiet<br/>
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; color:#4A3A2F; font-size:0.78em; padding-left:0.5em;">moments.</span>
+      </h1>
+      <p class="italic muted" style="margin-top:8mm; font-size:11.5pt; max-width:75mm; line-height:1.55;">
+        Editorial &amp; portrait photography — selected works, quiet moments.
+      </p>
+    </div>
+
+    <div>
+      <div style="height:0.5pt; background:#2B201A; opacity:0.25; margin-bottom:4mm;"></div>
+      <div style="display:flex; justify-content:space-between;">
+        <span class="mono" style="opacity:.65">Budapest · 35mm · Medium format</span>
+        <span class="mono" style="opacity:.65">Portfolio</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex:1; position:relative; overflow:hidden; background:#2B201A;">
+    <img src="p4.jpg" style="width:100%; height:100%; object-fit:cover; object-position: 60% 35%; display:block;" alt=""/>
+    <div style="position:absolute; right:10mm; bottom:10mm; color:#F2EBE5; font-family:'JetBrains Mono',monospace; font-size:7.5pt; letter-spacing:0.22em; text-transform:uppercase; opacity:0.95; text-shadow:0 0 10px rgba(43,32,26,0.55);">Plate I · R12 · F28</div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 2 — Index ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">Index</span>
+    <span class="line"></span>
+    <span class="mono">i</span>
+  </div>
+
+  <h1 class="h-display" style="font-size: 64pt; margin-bottom: 14mm;">
+    Portfolio<br/>
+    <span class="it">2026.</span>
+  </h1>
+
+  <ul class="toc-list" style="padding:0; margin:0;">
+    <li><span><span class="num">I</span> &nbsp;&nbsp; <span class="title">About</span></span><span class="mono">p. 03</span></li>
+    <li><span><span class="num">II</span> &nbsp;&nbsp; <span class="title">Portrait</span></span><span class="mono">p. 04 — 05</span></li>
+    <li><span><span class="num">III</span> &nbsp;&nbsp; <span class="title">Editorial</span></span><span class="mono">p. 06 — 07</span></li>
+    <li><span><span class="num">IV</span> &nbsp;&nbsp; <span class="title">Atelier</span></span><span class="mono">p. 08 — 09</span></li>
+    <li><span><span class="num">V</span> &nbsp;&nbsp; <span class="title">Index of plates</span></span><span class="mono">p. 10</span></li>
+    <li><span><span class="num">VI</span> &nbsp;&nbsp; <span class="title">Contact</span></span><span class="mono">p. 11</span></li>
+  </ul>
+
+  <p class="italic muted" style="margin-top: 18mm; max-width: 120mm; font-size: 13pt; line-height: 1.6;">
+    “I photograph presence, not the pose.” — grn.35
+  </p>
+</section>
+
+<!-- ─────────── PAGE 3 — About ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">I — About</span>
+    <span class="line"></span>
+    <span class="mono">03</span>
+  </div>
+
+  <h2 class="h-display" style="margin-bottom: 12mm;">
+    Light, material,<br/>
+    <span class="it">patience.</span>
+  </h2>
+
+  <div style="display:flex; gap: 12mm; padding-bottom: 22mm;">
+    <div class="body-col" style="flex:1; max-width: 95mm;">
+      <p style="margin: 0 0 5mm 0;">grn.35 is a visual journal written by light and texture. My work moves between portrait and editorial series — where material (silk, lace, skin, gold) meets natural light and a very quiet way of looking.</p>
+      <p style="margin: 0 0 5mm 0;">I work exclusively on film — 35mm and medium format. Each one offers a different rhythm: one is faster and closer, the other slower, with a longer breath. Warm skin tones, soft shadows, small imperfections.</p>
+      <p style="margin: 0;">I photograph presence rather than pose. The name — grn.35 — is a nod to a roll of 35mm film, and to the kind of patience film demands.</p>
+    </div>
+    <div style="flex:1; max-width: 78mm;">
+      <div class="img-frame" style="aspect-ratio: 3/4; height: 150mm;">
+        <img src="p3.jpg" alt="" />
+      </div>
+      <div class="caption">
+        <span class="italic">Pink satin, white column.</span>
+        <span class="mono">R09 · F15</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+    <div class="hairline" style="margin-bottom: 4mm;"></div>
+    <div style="display:flex; justify-content: space-between;">
+      <span class="mono">Commissions</span>
+      <span class="italic muted" style="font-size: 11pt;">Portrait series · Editorial collaborations · Brand &amp; lookbook · Jewellery &amp; material studies</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 4 — full-bleed plate ─────────── -->
+<section class="plate">
+  <span class="plate-folio">II — Portrait</span>
+  <img src="p4.jpg" alt="" />
+  <div class="plate-meta">Roll 12 · Frame 28 · 2026 — Shell and a gilded clasp</div>
+</section>
+
+<!-- ─────────── PAGE 5 — Portrait split ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">II — Portrait</span>
+    <span class="line"></span>
+    <span class="mono">05</span>
+  </div>
+
+  <div style="display:flex; gap: 12mm; align-items: flex-start;">
+    <div style="flex: 0 0 95mm;">
+      <div class="img-frame" style="aspect-ratio: 3/4; height: 175mm;">
+        <img src="p3.jpg" alt="" />
+      </div>
+      <div class="caption">
+        <span class="italic">Column</span>
+        <span class="mono">R09 · F15</span>
+      </div>
+    </div>
+    <div style="flex:1; padding-top: 60mm;">
+      <p class="mono" style="opacity:.6; margin: 0 0 4mm 0;">001 / 04</p>
+      <h3 class="display" style="font-size: 36pt; margin: 0 0 6mm 0;">Column<br/><span class="italic muted" style="font-size: 22pt;">— silence in stone.</span></h3>
+      <p class="italic muted" style="font-size: 13pt; line-height: 1.55; margin: 0;">Pink satin leaning against a white column — material meets stone, in a single breath.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 6 — full-bleed plate ─────────── -->
+<section class="plate">
+  <span class="plate-folio">III — Editorial</span>
+  <img src="p2.jpg" alt="" />
+  <div class="plate-meta">Roll 09 · Frame 12 · 2026 — At rest. Afternoon light</div>
+</section>
+
+<!-- ─────────── PAGE 7 — Editorial spread ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">III — Editorial</span>
+    <span class="line"></span>
+    <span class="mono">07</span>
+  </div>
+
+  <div class="img-frame" style="aspect-ratio: 16/10; width: 100%; height: 110mm;">
+    <img src="p2.jpg" alt="" />
+  </div>
+
+  <div style="display:flex; gap: 12mm; margin-top: 6mm; align-items: flex-start;">
+    <div style="flex: 1; max-width: 100mm;">
+      <p class="mono" style="opacity:.6; margin: 0 0 3mm 0;">002 / 04</p>
+      <h3 class="display" style="font-size: 30pt; margin: 0 0 4mm 0;">Afternoon<br/><span class="italic muted" style="font-size: 19pt;">— long shadows.</span></h3>
+      <p class="italic muted" style="font-size: 12pt; line-height: 1.55; margin: 0;">Sunlight stretches across the rug, hair wraps around the shoulder. One frame that asks for silence.</p>
+    </div>
+    <div style="flex: 0 0 60mm; text-align: right;">
+      <p class="mono" style="opacity:.55; margin: 0;">Roll 09</p>
+      <p class="mono" style="opacity:.55; margin: 1mm 0 0 0;">Frame 12</p>
+      <p class="mono" style="opacity:.55; margin: 1mm 0 0 0;">2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 8 — full-bleed plate ─────────── -->
+<section class="plate">
+  <span class="plate-folio">IV — Atelier</span>
+  <img src="p1.jpg" alt="" />
+  <div class="plate-meta">Roll 04 · Frame 01 · 2026 — Dried florals</div>
+</section>
+
+<!-- ─────────── PAGE 9 — Atelier ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">IV — Atelier</span>
+    <span class="line"></span>
+    <span class="mono">09</span>
+  </div>
+
+  <div style="display:flex; gap: 12mm; align-items: flex-start;">
+    <div style="flex:1; padding-top: 30mm;">
+      <p class="mono" style="opacity:.6; margin: 0 0 4mm 0;">003 / 04</p>
+      <h3 class="display" style="font-size: 36pt; margin: 0 0 6mm 0;">Atelier<br/><span class="italic muted" style="font-size: 22pt;">— a study in material.</span></h3>
+      <p class="italic muted" style="font-size: 13pt; line-height: 1.55; margin: 0;">Dried florals, up close. Face and plant woven from the same material — one colour, one time.</p>
+    </div>
+    <div style="flex: 0 0 95mm;">
+      <div class="img-frame" style="aspect-ratio: 3/4; height: 175mm;">
+        <img src="p1.jpg" alt="" />
+      </div>
+      <div class="caption">
+        <span class="italic">Atelier</span>
+        <span class="mono">R04 · F01</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 10 — Index of plates ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">V — Index of plates</span>
+    <span class="line"></span>
+    <span class="mono">10</span>
+  </div>
+
+  <h2 class="h-display" style="font-size: 40pt; margin-bottom: 10mm;">
+    Index<br/>
+    <span class="it" style="font-size: 22pt;">— of plates.</span>
+  </h2>
+
+  <div class="index-grid">
+    <div class="item">
+      <div class="img-frame"><img src="p4.jpg" alt="" /></div>
+      <div class="cap"><span>Plate I</span><span>R12 · F28</span></div>
+    </div>
+    <div class="item">
+      <div class="img-frame"><img src="p3.jpg" alt="" /></div>
+      <div class="cap"><span>Plate II</span><span>R09 · F15</span></div>
+    </div>
+    <div class="item">
+      <div class="img-frame"><img src="p2.jpg" alt="" /></div>
+      <div class="cap"><span>Plate III</span><span>R09 · F12</span></div>
+    </div>
+    <div class="item">
+      <div class="img-frame"><img src="p1.jpg" alt="" /></div>
+      <div class="cap"><span>Plate IV</span><span>R04 · F01</span></div>
+    </div>
+  </div>
+
+  <p class="italic muted" style="margin-top: 14mm; font-size: 12pt; max-width: 130mm; line-height: 1.6;">
+    Each frame is a moment from a roll of film — 35mm or medium format. Numbered, dated, none of them by accident.
+  </p>
+</section>
+
+<!-- ─────────── PAGE 11 — Contact ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">VI — Contact</span>
+    <span class="line"></span>
+    <span class="mono">11</span>
+  </div>
+
+  <h2 class="h-display" style="font-size: 60pt; margin-bottom: 10mm;">
+    Let's work<br/>
+    <span class="it">together.</span>
+  </h2>
+
+  <p class="italic muted" style="font-size: 14pt; max-width: 130mm; line-height: 1.55; margin: 0 0 14mm 0;">
+    For commissions, collaborations and private projects — send a note and I will reply within a week.
+  </p>
+
+  <div class="contact-grid">
+    <div class="row">
+      <span class="mono" style="opacity:.6">Email</span>
+      <span class="italic" style="font-size: 13pt;">grn35.analog@gmail.com</span>
+    </div>
+    <div class="row">
+      <span class="mono" style="opacity:.6">Instagram</span>
+      <span class="italic" style="font-size: 13pt;">@grn.35 · instagram.com/grn.35</span>
+    </div>
+    <div class="row">
+      <span class="mono" style="opacity:.6">Based in</span>
+      <span class="italic" style="font-size: 13pt;">Budapest · available across Europe</span>
+    </div>
+  </div>
+
+  <div style="margin-top: 18mm;">
+    <div class="hairline" style="margin-bottom: 4mm;"></div>
+    <div style="display:flex; justify-content: space-between;">
+      <span class="colophon">© 2026 grn.35 — All rights reserved.</span>
+      <span class="colophon gold">No. 01 / 2026</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

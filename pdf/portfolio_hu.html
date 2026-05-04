@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8" />
+<title>grn.35 — Portfólió 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ─────────── Page setup — portrait A4, generous margins ─────────── */
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+    background: #F2EBE5;
+    @top-left  { content: "grn.35"; font-family: "Fraunces", serif; font-size: 9pt; color: #2B201A; }
+    @top-right { content: "Portfólió · 2026"; font-family: "JetBrains Mono", monospace; font-size: 7.5pt; letter-spacing: 0.2em; text-transform: uppercase; color: #2B201A; opacity: 0.6; }
+    @bottom-left  { content: "Editorial és portréfotográfia"; font-family: "JetBrains Mono", monospace; font-size: 7pt; letter-spacing: 0.2em; text-transform: uppercase; color: #2B201A; opacity: 0.5; }
+    @bottom-right { content: counter(page) " / " counter(pages); font-family: "JetBrains Mono", monospace; font-size: 7.5pt; letter-spacing: 0.2em; color: #2B201A; opacity: 0.6; }
+  }
+
+  @page :first {
+    margin: 0;
+    background: #F2EBE5;
+    @top-left  { content: ""; }
+    @top-right { content: ""; }
+    @bottom-left  { content: ""; }
+    @bottom-right { content: ""; }
+  }
+  @page bleed {
+    margin: 0;
+    @top-left { content: ""; }
+    @top-right { content: ""; }
+    @bottom-left { content: ""; }
+    @bottom-right { content: ""; }
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #F2EBE5;
+    color: #2B201A;
+    font-family: "EB Garamond", serif;
+    font-size: 10.5pt;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .display { font-family: "Fraunces", serif; font-weight: 300; letter-spacing: -0.005em; line-height: 1; }
+  .italic  { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 300; }
+  .mono    { font-family: "JetBrains Mono", monospace; font-size: 7.5pt; letter-spacing: 0.22em; text-transform: uppercase; }
+  .gold    { color: #A8895C; }
+  .muted   { color: #4A3A2F; }
+  .hairline { height: 0.5pt; background: #2B201A; opacity: 0.25; width: 100%; }
+
+  /* ─────────── COVER ─────────── */
+  .cover {
+    page: bleed;
+    width: 210mm;
+    height: 297mm;
+    position: relative;
+    overflow: hidden;
+    background: #F2EBE5;
+    page-break-after: always;
+  }
+
+  /* ─────────── Standard editorial pages ─────────── */
+  .page {
+    page-break-after: always;
+    min-height: calc(297mm - 36mm);
+    position: relative;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .folio-row {
+    display: flex; align-items: center; gap: 8mm;
+    margin-bottom: 8mm;
+  }
+  .folio-row .line { flex: 1; height: 0.5pt; background: #2B201A; opacity: 0.25; }
+  .folio-row .label { color: #A8895C; }
+
+  .h-display {
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 48pt;
+    line-height: 0.98;
+    letter-spacing: -0.012em;
+  }
+  .h-display .it {
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-weight: 300;
+    color: #4A3A2F;
+    font-size: 0.78em;
+    display: block;
+    padding-left: 0.8em;
+  }
+
+  .body-col {
+    max-width: 130mm;
+    font-size: 11pt;
+    line-height: 1.75;
+  }
+
+  .img-frame {
+    position: relative;
+    overflow: hidden;
+    background: #EBE1D6;
+  }
+  .img-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .caption {
+    margin-top: 3mm;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 6mm;
+  }
+  .caption .it { font-size: 11pt; }
+
+  /* TOC */
+  .toc-list {
+    border-top: 0.5pt solid rgba(43,32,26,0.25);
+  }
+  .toc-list li {
+    list-style: none;
+    border-bottom: 0.5pt solid rgba(43,32,26,0.25);
+    padding: 4mm 0;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 6mm;
+  }
+  .toc-list .num { font-family: "JetBrains Mono", monospace; font-size: 8pt; opacity: 0.55; letter-spacing: 0.2em; }
+  .toc-list .title { font-family: "Fraunces", serif; font-weight: 300; font-size: 18pt; }
+
+  /* full-bleed plate */
+  .plate {
+    page: bleed;
+    width: 210mm; height: 297mm;
+    overflow: hidden;
+    page-break-after: always;
+    background: #2B201A;
+    position: relative;
+  }
+  .plate img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .plate-meta {
+    position: absolute;
+    left: 12mm; bottom: 10mm; right: 12mm;
+    color: #F2EBE5;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(43,32,26,0.6);
+  }
+  .plate-folio {
+    position: absolute;
+    right: 12mm; top: 10mm;
+    color: #F2EBE5;
+    font-family: "Fraunces", serif;
+    font-weight: 300;
+    font-size: 12pt;
+    opacity: 1;
+    text-shadow: 0 0 12px rgba(43,32,26,0.6);
+  }
+
+  /* contact page */
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+    max-width: 120mm;
+  }
+  .contact-grid .row {
+    border-top: 0.5pt solid rgba(43,32,26,0.25);
+    padding-top: 3mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .contact-grid .row:last-child { padding-bottom: 3mm; }
+
+  /* small grid index */
+  .index-grid { display: flex; flex-wrap: wrap; gap: 4mm; }
+  .index-grid .item { width: calc((100% - 8mm) / 3); }
+  .index-grid .item .img-frame { aspect-ratio: 3/4; height: 70mm; }
+  .index-grid .item .cap { display: flex; justify-content: space-between; margin-top: 2mm; font-size: 7pt; font-family: "JetBrains Mono", monospace; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; }
+
+  .colophon {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 7.5pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────── COVER ─────────── -->
+<section class="cover" style="display:flex;">
+  <div style="flex: 0 0 95mm; padding: 18mm 12mm 18mm 18mm; display:flex; flex-direction:column; justify-content:space-between; background:#F2EBE5; color:#2B201A;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div style="font-family:'Fraunces',serif; font-weight:300; font-size:22pt; line-height:1;">grn<span style="color:#A8895C">.</span>35</div>
+      <div class="mono" style="opacity:.6">No. 01</div>
+    </div>
+
+    <div>
+      <div class="mono gold" style="margin-bottom:6mm;">2026 · Első kötet</div>
+      <h1 style="font-family:'Fraunces',serif; font-weight:300; font-size:46pt; line-height:0.96; letter-spacing:-0.012em; margin:0;">
+        A csendes<br/>
+        pillanatok<br/>
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; color:#4A3A2F; font-size:0.78em; padding-left:0.5em;">krónikása.</span>
+      </h1>
+      <p class="italic muted" style="margin-top:8mm; font-size:11.5pt; max-width:75mm; line-height:1.55;">
+        Editorial és portréfotográfia — válogatott munkák, csendes pillanatok.
+      </p>
+    </div>
+
+    <div>
+      <div style="height:0.5pt; background:#2B201A; opacity:0.25; margin-bottom:4mm;"></div>
+      <div style="display:flex; justify-content:space-between;">
+        <span class="mono" style="opacity:.65">Budapest · 35mm · Középformátum</span>
+        <span class="mono" style="opacity:.65">Portfólió</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex:1; position:relative; overflow:hidden; background:#2B201A;">
+    <img src="p4.jpg" style="width:100%; height:100%; object-fit:cover; object-position: 60% 35%; display:block;" alt=""/>
+    <div style="position:absolute; right:10mm; bottom:10mm; color:#F2EBE5; font-family:'JetBrains Mono',monospace; font-size:7.5pt; letter-spacing:0.22em; text-transform:uppercase; opacity:0.95; text-shadow:0 0 10px rgba(43,32,26,0.55);">I. tábla · R12 · F28</div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 2 — Tartalom ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">Tartalom</span>
+    <span class="line"></span>
+    <span class="mono">i</span>
+  </div>
+
+  <h1 class="h-display" style="font-size: 64pt; margin-bottom: 14mm;">
+    Portfólió<br/>
+    <span class="it">2026.</span>
+  </h1>
+
+  <ul class="toc-list" style="padding:0; margin:0;">
+    <li><span><span class="num">I</span> &nbsp;&nbsp; <span class="title">Bemutatkozás</span></span><span class="mono">3. oldal</span></li>
+    <li><span><span class="num">II</span> &nbsp;&nbsp; <span class="title">Portré</span></span><span class="mono">4 — 5. oldal</span></li>
+    <li><span><span class="num">III</span> &nbsp;&nbsp; <span class="title">Editorial</span></span><span class="mono">6 — 7. oldal</span></li>
+    <li><span><span class="num">IV</span> &nbsp;&nbsp; <span class="title">Műterem</span></span><span class="mono">8 — 9. oldal</span></li>
+    <li><span><span class="num">V</span> &nbsp;&nbsp; <span class="title">Tárgymutató</span></span><span class="mono">10. oldal</span></li>
+    <li><span><span class="num">VI</span> &nbsp;&nbsp; <span class="title">Kapcsolat</span></span><span class="mono">11. oldal</span></li>
+  </ul>
+
+  <p class="italic muted" style="margin-top: 18mm; max-width: 120mm; font-size: 13pt; line-height: 1.6;">
+    „A jelenlétet fényképezem, nem a pózt.” — grn.35
+  </p>
+</section>
+
+<!-- ─────────── PAGE 3 — Bemutatkozás ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">I — Bemutatkozás</span>
+    <span class="line"></span>
+    <span class="mono">03</span>
+  </div>
+
+  <h2 class="h-display" style="margin-bottom: 12mm;">
+    Fény, anyag,<br/>
+    <span class="it">türelem.</span>
+  </h2>
+
+  <div style="display:flex; gap: 12mm; padding-bottom: 22mm;">
+    <div class="body-col" style="flex:1; max-width: 95mm;">
+      <p style="margin: 0 0 5mm 0;">grn.35 egy vizuális napló, amit a fény és a textúrák írnak. A munkáim portrék és editorial sorozatok között mozognak — ott, ahol az anyag (selyem, csipke, bőr, arany) találkozik a természetes fénnyel és egy nagyon csendes nézéssel.</p>
+      <p style="margin: 0 0 5mm 0;">Kizárólag analógon dolgozom — 35mm-en és középformátumon. A kettő különböző ritmust kínál: az egyik gyorsabb és közelibb, a másik lassabb, nagyobb lélegzetvételű. Meleg bőrtónusok, lágy árnyékok, kis tökéletlenségek.</p>
+      <p style="margin: 0;">Inkább a jelenlétet fényképezem, mint a pózt. A nevem — grn.35 — egy 35mm-es film tekercsére utal, és arra a fajta türelemre, amit a film megkövetel.</p>
+    </div>
+    <div style="flex:1; max-width: 78mm;">
+      <div class="img-frame" style="aspect-ratio: 3/4; height: 150mm;">
+        <img src="p3.jpg" alt="" />
+      </div>
+      <div class="caption">
+        <span class="italic">Rózsaszín szatén, fehér oszlop.</span>
+        <span class="mono">R09 · F15</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute; bottom: 0; left: 0; right: 0;">
+    <div class="hairline" style="margin-bottom: 4mm;"></div>
+    <div style="display:flex; justify-content: space-between;">
+      <span class="mono">Felkérések</span>
+      <span class="italic muted" style="font-size: 11pt;">Portré sorozatok · Editorial együttműködések · Brand &amp; lookbook · Ékszer és anyagstúdió</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 4 — full-bleed plate ─────────── -->
+<section class="plate">
+  <span class="plate-folio">II — Portré</span>
+  <img src="p4.jpg" alt="" />
+  <div class="plate-meta">12. tekercs · 28. kocka · 2026 — Kagyló és aranyszeg</div>
+</section>
+
+<!-- ─────────── PAGE 5 — Portré split ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">II — Portré</span>
+    <span class="line"></span>
+    <span class="mono">05</span>
+  </div>
+
+  <div style="display:flex; gap: 12mm; align-items: flex-start;">
+    <div style="flex: 0 0 95mm;">
+      <div class="img-frame" style="aspect-ratio: 3/4; height: 175mm;">
+        <img src="p3.jpg" alt="" />
+      </div>
+      <div class="caption">
+        <span class="italic">Oszlop</span>
+        <span class="mono">R09 · F15</span>
+      </div>
+    </div>
+    <div style="flex:1; padding-top: 60mm;">
+      <p class="mono" style="opacity:.6; margin: 0 0 4mm 0;">001 / 04</p>
+      <h3 class="display" style="font-size: 36pt; margin: 0 0 6mm 0;">Oszlop<br/><span class="italic muted" style="font-size: 22pt;">— csend a kőben.</span></h3>
+      <p class="italic muted" style="font-size: 13pt; line-height: 1.55; margin: 0;">Rózsaszín szatén egy fehér oszlopnak dőlve — az anyag és a kő találkozása, egyetlen lélegzetvételben.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 6 — full-bleed plate ─────────── -->
+<section class="plate">
+  <span class="plate-folio">III — Editorial</span>
+  <img src="p2.jpg" alt="" />
+  <div class="plate-meta">9. tekercs · 12. kocka · 2026 — Pihenő. Délutáni fény</div>
+</section>
+
+<!-- ─────────── PAGE 7 — Editorial spread ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">III — Editorial</span>
+    <span class="line"></span>
+    <span class="mono">07</span>
+  </div>
+
+  <div class="img-frame" style="aspect-ratio: 16/10; width: 100%; height: 110mm;">
+    <img src="p2.jpg" alt="" />
+  </div>
+
+  <div style="display:flex; gap: 12mm; margin-top: 6mm; align-items: flex-start;">
+    <div style="flex: 1; max-width: 100mm;">
+      <p class="mono" style="opacity:.6; margin: 0 0 3mm 0;">002 / 04</p>
+      <h3 class="display" style="font-size: 30pt; margin: 0 0 4mm 0;">Délután<br/><span class="italic muted" style="font-size: 19pt;">— hosszú árnyékok.</span></h3>
+      <p class="italic muted" style="font-size: 12pt; line-height: 1.55; margin: 0;">A napfény elnyúlik a szőnyegen, a haj körbeöleli a vállat. Egyetlen képkocka, ami csendet kér.</p>
+    </div>
+    <div style="flex: 0 0 60mm; text-align: right;">
+      <p class="mono" style="opacity:.55; margin: 0;">9. tekercs</p>
+      <p class="mono" style="opacity:.55; margin: 1mm 0 0 0;">12. kocka</p>
+      <p class="mono" style="opacity:.55; margin: 1mm 0 0 0;">2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 8 — full-bleed plate ─────────── -->
+<section class="plate">
+  <span class="plate-folio">IV — Műterem</span>
+  <img src="p1.jpg" alt="" />
+  <div class="plate-meta">4. tekercs · 1. kocka · 2026 — Szárított virágok</div>
+</section>
+
+<!-- ─────────── PAGE 9 — Műterem ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">IV — Műterem</span>
+    <span class="line"></span>
+    <span class="mono">09</span>
+  </div>
+
+  <div style="display:flex; gap: 12mm; align-items: flex-start;">
+    <div style="flex:1; padding-top: 30mm;">
+      <p class="mono" style="opacity:.6; margin: 0 0 4mm 0;">003 / 04</p>
+      <h3 class="display" style="font-size: 36pt; margin: 0 0 6mm 0;">Műterem<br/><span class="italic muted" style="font-size: 22pt;">— anyagtanulmány.</span></h3>
+      <p class="italic muted" style="font-size: 13pt; line-height: 1.55; margin: 0;">Szárított virágok, közelről. Az arc és a növény ugyanabból az alapanyagból szövődik — egyetlen szín, egyetlen idő.</p>
+    </div>
+    <div style="flex: 0 0 95mm;">
+      <div class="img-frame" style="aspect-ratio: 3/4; height: 175mm;">
+        <img src="p1.jpg" alt="" />
+      </div>
+      <div class="caption">
+        <span class="italic">Műterem</span>
+        <span class="mono">R04 · F01</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── PAGE 10 — Tárgymutató ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">V — Tárgymutató</span>
+    <span class="line"></span>
+    <span class="mono">10</span>
+  </div>
+
+  <h2 class="h-display" style="font-size: 40pt; margin-bottom: 10mm;">
+    Tárgymutató<br/>
+    <span class="it" style="font-size: 22pt;">— a táblák jegyzéke.</span>
+  </h2>
+
+  <div class="index-grid">
+    <div class="item">
+      <div class="img-frame"><img src="p4.jpg" alt="" /></div>
+      <div class="cap"><span>I. tábla</span><span>R12 · F28</span></div>
+    </div>
+    <div class="item">
+      <div class="img-frame"><img src="p3.jpg" alt="" /></div>
+      <div class="cap"><span>II. tábla</span><span>R09 · F15</span></div>
+    </div>
+    <div class="item">
+      <div class="img-frame"><img src="p2.jpg" alt="" /></div>
+      <div class="cap"><span>III. tábla</span><span>R09 · F12</span></div>
+    </div>
+    <div class="item">
+      <div class="img-frame"><img src="p1.jpg" alt="" /></div>
+      <div class="cap"><span>IV. tábla</span><span>R04 · F01</span></div>
+    </div>
+  </div>
+
+  <p class="italic muted" style="margin-top: 14mm; font-size: 12pt; max-width: 130mm; line-height: 1.6;">
+    Minden képkocka egy filmtekercs egy pillanata — 35mm vagy középformátum. Sorszámozva, dátumozva, egyik sem véletlen.
+  </p>
+</section>
+
+<!-- ─────────── PAGE 11 — Kapcsolat ─────────── -->
+<section class="page">
+  <div class="folio-row">
+    <span class="mono label">VI — Kapcsolat</span>
+    <span class="line"></span>
+    <span class="mono">11</span>
+  </div>
+
+  <h2 class="h-display" style="font-size: 60pt; margin-bottom: 10mm;">
+    Dolgozzunk<br/>
+    <span class="it">együtt.</span>
+  </h2>
+
+  <p class="italic muted" style="font-size: 14pt; max-width: 130mm; line-height: 1.55; margin: 0 0 14mm 0;">
+    Felkérésekért, együttműködésekért és magántervekért — írj egy üzenetet, és visszajelzek egy héten belül.
+  </p>
+
+  <div class="contact-grid">
+    <div class="row">
+      <span class="mono" style="opacity:.6">Email</span>
+      <span class="italic" style="font-size: 13pt;">grn35.analog@gmail.com</span>
+    </div>
+    <div class="row">
+      <span class="mono" style="opacity:.6">Instagram</span>
+      <span class="italic" style="font-size: 13pt;">@grn.35 · instagram.com/grn.35</span>
+    </div>
+    <div class="row">
+      <span class="mono" style="opacity:.6">Bázis</span>
+      <span class="italic" style="font-size: 13pt;">Budapest · elérhető Európa-szerte</span>
+    </div>
+  </div>
+
+  <div style="margin-top: 18mm;">
+    <div class="hairline" style="margin-bottom: 4mm;"></div>
+    <div style="display:flex; justify-content: space-between;">
+      <span class="colophon">© 2026 grn.35 — Minden jog fenntartva.</span>
+      <span class="colophon gold">No. 01 / 2026</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
